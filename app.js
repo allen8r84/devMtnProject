@@ -7,9 +7,9 @@ app.config(function($routeProvider){
     templateUrl: 'landing/landing.html',
     controller: 'landController',
   })
-  .when('/teams/:team',{
-      templateUrl: 'js/teams/teamTmpl.html',
-      controller: 'teamCtrl',
+  .when('/dashboard',{
+      templateUrl: 'authUser/authUser.html',
+      controller: 'userController',
   })
   .otherwise({
     redirectTo: '/'

@@ -1,0 +1,29 @@
+<!-- Login view -->
+<li class="nav pull-right dropdown" id="menuLogin">
+    <a class="dropdown-toggle btn-group" href="#" data-toggle="dropdown" id="navLogin">Login</a>
+    <div class="dropdown-menu" style="padding:10px; margin:10px" ng-click="$event.stopPropagation()">
+        <form class="form" id="formLogin" ng-submit="login()"> 
+            <input name="Email" id="email" type="email" placeholder="Email" /> 
+            <input name="password" id="password" type="password" placeholder="Password" />
+            <div class="row">
+                <div class="col-xs-6">
+                    <input type="button" id="btnLogin" class="btn btn-info btn-block" value="Login"></input>
+                </div>
+            </div>
+        </form>
+        <br />
+        <!-- Registration View -->
+        <a href="" ng-click="showReg()"> New User? Click register...</a>
+        <form class="form" id="formRegister" ng-submit="register()" ng-show="reg"> 
+            <input name="fName" id="fName" type="fName" placeholder="First Name" required></input>
+            <input name="lName" id="lName" type="lName" placeholder="Last Name" required></input>
+            <input name="Email" id="email" type="email" placeholder="Email" required/> 
+            <input name="password" id="password" type="password" placeholder="Password" required/>
+            <div class="row">
+                <div class="col-xs-8">
+                    <input type="button" id="btnLogin" class="btn btn-info btn-block" value="Register"></input>
+                </div>
+            </div>
+        </form>
+    </div>
+</li>

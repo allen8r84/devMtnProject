@@ -2,13 +2,14 @@ var app = angular.module('estateLMS');
 
 //Authentication service directive.
 //determine between "login/register" or "logout" and their obvious actions
-app.directive('authService', function($location){
+app.directive('loginService', function($location){
     function link($scope, element, attr) {
         
     }
     return {
         restrict: 'EA',
-        templateUrl: './directives/login/authTemplate.html',
+        templateUrl: './directives/login/loginTemplate.html',
+        controller: 'loginConroller',
         link: link
     }
 

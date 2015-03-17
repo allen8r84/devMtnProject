@@ -19,9 +19,6 @@ app.controller('loginConroller', function ($scope, $location, $window, $firebase
 			password: password
 		}).then(function(authData) {
 			console.log('authData', authData);
-			var newObj = $firebaseObject(new Firebase(firebaseUrl + '/users/' + authData.uid));
-			console.log(newObj.$id);
-			$location.path('/dashboard/' + newObj.$id);
 		}, function(error) {
 			console.log('error', error);
 		});

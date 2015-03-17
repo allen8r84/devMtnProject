@@ -1,0 +1,1 @@
+1) env.js is where to change your: firebase URL, site Title, navbar branding

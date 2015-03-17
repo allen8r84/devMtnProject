@@ -24,7 +24,10 @@ app.config(function($routeProvider){
     templateUrl: 'landing/landing.html',
     controller: 'landController'
   })
-  .when('/dashboard/:userId',{
+  .when('/dashboard', {
+     redirectTo: '/dashboard/error' 
+  })
+  .when('/dashboard/:user',{
       templateUrl: 'authUser/authUser.html',
       controller: 'userController',
       resolve: {

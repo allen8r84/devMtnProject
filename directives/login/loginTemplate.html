@@ -13,7 +13,7 @@
         </form>
         <br />
         <!-- Registration View -->
-        <a href="" ng-click="showReg()"> New User? Click register...</a>
+        <a href="" ng-click="showReg()"> New User? Click to register...</a>
         <form name="regForm" class="form" id="formRegister" ng-submit="register(emailr, passwordr)" ng-show="reg"> 
             <input name="fName" id="fName" type="fName" placeholder="First Name" ng-model="fName" required></input>
             <input name="lName" id="lName" type="lName" placeholder="Last Name" ng-model="lName" required></input>
@@ -31,9 +31,9 @@
 
 <!-- Logout View -->
 <li class="nav pull-right dropdown" id="menuLogout" ng-show="loggedInUser">
-    <a class="dropdown-toggle btn-group" href="#" data-toggle="dropdown" id="navLogout">Hello, {{loggedInUser.fName.toUpperCase()}}!</a>
-    <div class="dropdown-menu" style="padding:10px; margin:10px" ng-click="$event.stopPropagation()">
-        <a href="#/dashboard/{{loggedInUser.uid}}">Dashboard</a><br />
+    <a class="dropdown-toggle btn-group" href="#" data-toggle="dropdown" id="navLogout"><strong>Hello, {{loggedInUser.fName.toUpperCase()}}!</strong></a>
+    <div class="dropdown-menu" style="padding:10px; margin:10px">
+        <a href="" ng-click="dashboard()">Dashboard</a><br />
         <a href="" ng-click="logOut()">Logout</a>    
     </div>
 </li>

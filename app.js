@@ -1,6 +1,6 @@
 var app = angular.module('estateLMS',['firebase', 'ngRoute']);
 
-app.run(function($rootScope, $location) {
+app.run(function($rootScope, $location, envService) {
     $rootScope.$on("$routeChangeError", function(event, next, previous, error) {
       // We can catch the error thrown when the $requireAuth promise is rejected
       // and redirect the user back to the home page
@@ -9,6 +9,7 @@ app.run(function($rootScope, $location) {
         $location.path('/');
       }
     });
+    $rootScope.brandTitle = envService.getEnv().brandTitle;
 });
 
 app.factory('Auth', function($firebaseAuth, envService) {

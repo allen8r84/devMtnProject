@@ -13,10 +13,10 @@ app.directive('theTime', function($interval){
             $interval(function() {
                 updateTime();
             }, 1000);   
-        }
-        return {
+    }
+    return {
             restrict: 'E',
             template: '<div>{{time | date:format}}</div>',
             link: link
-        }
+    }
 });

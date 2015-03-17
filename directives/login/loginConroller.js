@@ -4,7 +4,14 @@ app.controller('loginConroller', function ($scope, $location, $window, $firebase
     var firebaseUrl = envService.getEnv().firebase;
     var authObject = $firebaseAuth(new Firebase(firebaseUrl));
     var moment = $window.moment;
-    $rootScope.loggedInUser = null;
+    
+    authObject.$onAuth(function(authData) {
+        if (authData) {
+         $rootScope.loggedInUser = $firebaseObject(new Firebase(firebaseUrl + "/users/" + authData.uid));
+        } else {
+          $rootScope.loggedInUser = null;
+        }
+      });
     
     $scope.logIn = function(email, password) {
 		authObject.$authWithPassword({
@@ -12,8 +19,9 @@ app.controller('loginConroller', function ($scope, $location, $window, $firebase
 			password: password
 		}).then(function(authData) {
 			console.log('authData', authData);
-			$rootScope.loggedInUser = $firebaseObject(new Firebase(firebaseUrl + "/users/" + authData.uid));
-			$location.path('/dashboard/' + $rootScope.loggedInUser.uid);
+			var newObj = $firebaseObject(new Firebase(firebaseUrl + '/users/' + authData.uid));
+			console.log(newObj.$id);
+			$location.path('/dashboard/' + newObj.$id);
 		}, function(error) {
 			console.log('error', error);
 		});
@@ -40,6 +48,10 @@ app.controller('loginConroller', function ($scope, $location, $window, $firebase
 	    delete $rootScope.loggedInUser;
 	    $location.path('/');
 	};
+	
+	$scope.dashboard = function(){
+	    $location.path('/dashboard/' + $rootScope.loggedInUser.uid);
+	}
     
     
     $scope.showReg = function(){

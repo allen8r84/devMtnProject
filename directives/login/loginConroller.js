@@ -1,9 +1,10 @@
 var app = angular.module('estateLMS');
 
-app.controller('loginConroller', function ($scope, $location, envService, $window, $firebaseArray, $firebaseObject, $firebaseAuth, $timeout) {
+app.controller('loginConroller', function ($scope, $location, $window, $firebaseAuth, envService, loginService, $rootScope, $firebaseObject) {
     var firebaseUrl = envService.getEnv().firebase;
     var authObject = $firebaseAuth(new Firebase(firebaseUrl));
     var moment = $window.moment;
+    $rootScope.loggedInUser = null;
     
     $scope.logIn = function(email, password) {
 		authObject.$authWithPassword({
@@ -11,6 +12,8 @@ app.controller('loginConroller', function ($scope, $location, envService, $windo
 			password: password
 		}).then(function(authData) {
 			console.log('authData', authData);
+			$rootScope.loggedInUser = $firebaseObject(new Firebase(firebaseUrl + "/users/" + authData.uid));
+			$location.path('/dashboard/' + $rootScope.loggedInUser.uid);
 		}, function(error) {
 			console.log('error', error);
 		});
@@ -26,29 +29,16 @@ app.controller('loginConroller', function ($scope, $location, envService, $windo
 				password: password
 			});
 		}).then(function(authData) {
-			var userEmail = email,
-				uid = authData.uid,
-				user = $firebaseObject(new Firebase(firebaseUrl + "/users/" + uid));
-			
-			console.log('authData', authData);
-
-			$timeout(function() {
-				user.email = userEmail;
-				user.uid = uid;
-				user.created = moment().format();
-				user.fName = $scope.fName;
-				user.lName = $scope.lName;
-				user.lastLogon = moment().format();
-				user.$save().then(function(success) {
-					console.log('success', success);
-				}, function(error) {
-					console.log('error', error);
-				});		
-			});
-
+            loginService.registerUser(email, authData, $scope.fName, $scope.lName);
 		}, function(error) {
 			console.log('error', error);
 		});	
+	};
+	
+	$scope.logOut = function() {
+	    authObject.$unauth();
+	    delete $rootScope.loggedInUser;
+	    $location.path('/');
 	};
     
     

@@ -1,5 +1,5 @@
 <!-- Login view -->
-<li class="nav pull-right dropdown" id="menuLogin">
+<li class="nav pull-right dropdown" id="menuLogin" ng-show="!loggedInUser">
     <a class="dropdown-toggle btn-group" href="#" data-toggle="dropdown" id="navLogin">Login</a>
     <div class="dropdown-menu" style="padding:10px; margin:10px" ng-click="$event.stopPropagation()">
         <form name="loginForm" class="form" id="formLogin" ng-submit="logIn(email, password)"> 
@@ -25,5 +25,15 @@
                 </div>
             </div>
         </form>
+    </div>
+</li>
+
+
+<!-- Logout View -->
+<li class="nav pull-right dropdown" id="menuLogout" ng-show="loggedInUser">
+    <a class="dropdown-toggle btn-group" href="#" data-toggle="dropdown" id="navLogout">Hello, {{loggedInUser.fName.toUpperCase()}}!</a>
+    <div class="dropdown-menu" style="padding:10px; margin:10px" ng-click="$event.stopPropagation()">
+        <a href="#/dashboard/{{loggedInUser.uid}}">Dashboard</a><br />
+        <a href="" ng-click="logOut()">Logout</a>    
     </div>
 </li>

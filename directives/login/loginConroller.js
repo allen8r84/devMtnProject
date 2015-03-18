@@ -1,6 +1,6 @@
 var app = angular.module('estateLMS');
 
-app.controller('loginConroller', function ($scope, $location, $window, $firebaseAuth, envService, loginService, $rootScope, $firebaseObject) {
+app.controller('loginConroller', function ($scope, $location, $window, $firebaseAuth, envService, loginService, $rootScope, $firebaseObject, $timeout) {
     var firebaseUrl = envService.getEnv().firebase;
     var authObject = $firebaseAuth(new Firebase(firebaseUrl));
     var moment = $window.moment;
@@ -11,14 +11,20 @@ app.controller('loginConroller', function ($scope, $location, $window, $firebase
         } else {
           $rootScope.loggedInUser = null;
         }
-      })(authData);;
+      })
     
     $scope.logIn = function(email, password) {
 		authObject.$authWithPassword({
 			email: email,
 			password: password
 		}).then(function(authData) {
+			var user = $firebaseObject(new Firebase(firebaseUrl + "/users/" + authData.uid));
+           user.$loaded().then(function(user){
+                $scope.uid = user.uid;
+                $location.path('/dashboard/' + $scope.uid)
+            })
 			console.log('authData', authData);
+			
 		}, function(error) {
 			console.log('error', error);
 		});

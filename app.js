@@ -24,17 +24,21 @@ app.config(function($routeProvider){
     templateUrl: 'landing/landing.html',
     controller: 'landController'
   })
-  .when('/dashboard', {
-     redirectTo: '/' 
-  })
-  .when('/dashboard/:user',{
+  .when('/dashboard/:userId',{
       templateUrl: 'authUser/authUser.html',
       controller: 'userController',
       resolve: {
           "currentauth": function(Auth){
               return Auth.$requireAuth();
+          },
+          "user": function(authUserService, envService, $firebaseObject, Auth){
+              var fbrul = envService.getEnv().firebase;
+              var authData = Auth.$getAuth();
+              var fbuserID = $firebaseObject(new Firebase(fbrul + '/users/' + authData.uid));
+                var uid = fbuserID.$id;
+                return authUserService.getUser(uid);   
           }
-      }
+        }
   })
   .otherwise({
     redirectTo: '/'

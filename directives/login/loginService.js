@@ -23,4 +23,6 @@ app.service('loginService', function(envService, $firebaseObject, $timeout, $roo
 				});		
 			});
     }
+    
+    
 });

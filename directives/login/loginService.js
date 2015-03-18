@@ -1,6 +1,6 @@
 var app = angular.module('estateLMS');
 
-app.service('loginService', function(envService, $firebaseObject, $timeout, $rootScope){
+app.service('loginService', function(envService, $firebaseObject, $timeout, $rootScope, $location){
     var firebaseUrl = envService.getEnv().firebase; 
     this.registerUser = function(email, authData, fName, lName){
         	var userEmail = email;

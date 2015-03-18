@@ -11,7 +11,7 @@ app.controller('loginConroller', function ($scope, $location, $window, $firebase
         } else {
           $rootScope.loggedInUser = null;
         }
-      });
+      })(authData);;
     
     $scope.logIn = function(email, password) {
 		authObject.$authWithPassword({

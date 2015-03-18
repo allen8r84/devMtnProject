@@ -12,23 +12,4 @@ app.directive('loginService', function($location){
         controller: 'loginConroller',
         link: link
     }
-
-
-
-/*    function link($scope, element, attr) {
-            $scope.format = "MMM-d h:mm:ss"; //add " a" at the end to add AM/PM
-            
-            function updateTime(){
-                $scope.time = Date.now();
-            }
-            
-            $interval(function() {
-                updateTime();
-            }, 1000);   
-        }
-        return {
-            restrict: 'E',
-            template: '<div>{{time | date:format}}<div>',
-            link: link
-        }*/
 });

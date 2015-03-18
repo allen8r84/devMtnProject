@@ -22,6 +22,7 @@ app.controller('loginConroller', function ($scope, $location, $window, $firebase
             user.$loaded().then(function(user){
                 var uid = user.uid;
                 user.lastLogon = moment().format();
+                user.logInCount = user.logInCount + 1;
                 user.$save().then(function(success) {
 					/*console.log('success', success);*/
 				}, function(error) {
@@ -34,6 +35,8 @@ app.controller('loginConroller', function ($scope, $location, $window, $firebase
 		}, function(error) {
 			console.log('error', error);
 		});
+		$scope.email = null;
+		$scope.password = null;
 	};
 	
 	$scope.register = function(email, password) {

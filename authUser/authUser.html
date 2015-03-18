@@ -1,5 +1,6 @@
 <div class="container">
     <sidenav></sidenav>
-    {{hello}}<br />
-    <span>hello there {{user.fName}} {{user.lName}}</span>
+    <br />
+    <span>hello there {{user.fName}} {{user.lName}}</span><br/>
+    you last logged in on {{user.lastLogon | date: format}}
 </div>

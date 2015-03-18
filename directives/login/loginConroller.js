@@ -19,9 +19,15 @@ app.controller('loginConroller', function ($scope, $location, $window, $firebase
 			password: password
 		}).then(function(authData) {
 			var user = $firebaseObject(new Firebase(firebaseUrl + "/users/" + authData.uid));
-           user.$loaded().then(function(user){
-                $scope.uid = user.uid;
-                $location.path('/dashboard/' + $scope.uid)
+            user.$loaded().then(function(user){
+                var uid = user.uid;
+                user.lastLogon = moment().format();
+                user.$save().then(function(success) {
+					/*console.log('success', success);*/
+				}, function(error) {
+					console.log('error', error);
+				});
+                $location.path('/dashboard/' + uid)
             })
 			console.log('authData', authData);
 			
@@ -41,6 +47,11 @@ app.controller('loginConroller', function ($scope, $location, $window, $firebase
 			});
 		}).then(function(authData) {
             loginService.registerUser(email, authData, $scope.fName, $scope.lName);
+            var user = $firebaseObject(new Firebase(firebaseUrl + "/users/" + authData.uid));
+            user.$loaded().then(function(user){
+                var uid = user.uid;
+                $location.path('/dashboard/' + uid)
+            })
 		}, function(error) {
 			console.log('error', error);
 		});	

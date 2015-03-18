@@ -15,6 +15,7 @@ app.service('loginService', function(envService, $firebaseObject, $timeout, $roo
 				user.created = moment().format();
 				user.fName = fName;
 				user.lName = lName;
+				user.role = 'user';
 				user.lastLogon = moment().format();
 				user.$save().then(function(success) {
 					/*console.log('success', success);*/

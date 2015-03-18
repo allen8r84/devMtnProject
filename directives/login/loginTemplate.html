@@ -11,9 +11,8 @@
                 </div>
             </div>
         </form>
-        <br />
         <!-- Registration View -->
-        <a href="" ng-click="showReg()"> New User? Click to register...</a>
+        <hr></hr><a href="" ng-click="showReg()"> New User? Click to register...</a>
         <form name="regForm" class="form" id="formRegister" ng-submit="register(emailr, passwordr)" ng-show="reg"> 
             <input name="fName" id="fName" type="fName" placeholder="First Name" ng-model="fName" required></input>
             <input name="lName" id="lName" type="lName" placeholder="Last Name" ng-model="lName" required></input>
@@ -33,7 +32,7 @@
 <li class="nav pull-right dropdown" id="menuLogout" ng-show="loggedInUser">
     <a class="dropdown-toggle btn-group" href="#" data-toggle="dropdown" id="navLogout"><strong>Hello, {{loggedInUser.fName.toUpperCase()}}!</strong></a>
     <div class="dropdown-menu" style="padding:10px; margin:10px">
-        <a href="" ng-click="dashboard()">Dashboard</a><br />
+        <a href="" ng-click="dashboard()">Dashboard</a><br /><hr></hr>
         <a href="" ng-click="logOut()">Logout</a>    
     </div>
 </li>

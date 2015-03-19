@@ -13,6 +13,7 @@ app.controller('loginConroller', function ($scope, $location, $window, $firebase
         }
       })
     
+    
     $scope.logIn = function(email, password) {
 		authObject.$authWithPassword({
 			email: email,
@@ -30,7 +31,6 @@ app.controller('loginConroller', function ($scope, $location, $window, $firebase
 				});
                 $location.path('/dashboard/' + uid)
             })
-			console.log('authData', authData);
 			
 		}, function(error) {
 			console.log('error', error);
@@ -69,6 +69,18 @@ app.controller('loginConroller', function ($scope, $location, $window, $firebase
 	$scope.dashboard = function(){
 	    $location.path('/dashboard/' + $rootScope.loggedInUser.uid);
 	}
+	
+	$scope.admin = function(role, id){
+	    debugger
+	    if(role === "sAdmin"){
+	        $location.path('./dashboard/' + id + '/admin');
+	    } else if (role === 'cService'){
+	        $location.path('./dashboard/' + id + '/admin');
+	    }else {
+	        $location.path('./dashboard/' + id);
+	    }
+	}
+	
     
     
     $scope.showReg = function(){

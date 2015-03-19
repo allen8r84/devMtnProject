@@ -6,8 +6,8 @@ app.service('loginService', function(envService, $firebaseObject, $timeout, $roo
         	var userEmail = email;
 			var	uid = authData.uid;
 			var	user = $firebaseObject(new Firebase(firebaseUrl + "/users/" + uid));
-            $rootScope.loggedInUser = user;
-            
+                $rootScope.loggedInUser = user;    
+        
             
 			$timeout(function() {
 				user.email = userEmail;
@@ -15,7 +15,7 @@ app.service('loginService', function(envService, $firebaseObject, $timeout, $roo
 				user.created = moment().format();
 				user.fName = fName;
 				user.lName = lName;
-				user.role = 'user';
+				user.role = 'uUser';
 				user.logInCount = 1;
 				user.lastLogon = moment().format();
 				user.$save().then(function(success) {
@@ -25,6 +25,6 @@ app.service('loginService', function(envService, $firebaseObject, $timeout, $roo
 				});		
 			});
     }
-    
+
     
 });

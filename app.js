@@ -24,22 +24,45 @@ app.config(function($routeProvider){
     templateUrl: 'landing/landing.html',
     controller: 'landController'
   })
-  .when('/dashboard/:userId',{
+  .when('/dashboard',{
       templateUrl: 'authUser/authUser.html',
       controller: 'userController',
       resolve: {
           "currentauth": function(Auth){
               return Auth.$requireAuth();
-          },
+          }
+        }
+  })
+  .when('/dashboard/:userId',{
+      templateUrl: 'authUser/authUser.html',
+      controller: 'userController',
+      resolve: {
           "user": function(authUserService, envService, $firebaseObject, Auth){
               var fbrul = envService.getEnv().firebase;
               var authData = Auth.$getAuth();
               var fbuserID = $firebaseObject(new Firebase(fbrul + '/users/' + authData.uid));
-                var uid = fbuserID.$id;
-                return authUserService.getUser(uid);   
+              var uid = fbuserID.$id;
+              return authUserService.getUser(uid);
+          },
+          "currentauth": function(Auth){
+              return Auth.$requireAuth();
           }
         }
   })
+  .when('/dashboard/:userId/admin', {
+        templateUrl: 'adminUser/adminUser.html',
+        controller: 'adminController',
+        resolve: {
+          "user": function(authUserService, envService, $firebaseObject, Auth){
+              var fbrul = envService.getEnv().firebase;
+              var authData = Auth.$getAuth();
+              var fbuserID = $firebaseObject(new Firebase(fbrul + '/users/' + authData.uid));
+              var uid = fbuserID.$id;
+              return authUserService.getUser(uid);   
+          }  
+        }
+      
+  })  
   .otherwise({
     redirectTo: '/'
   });

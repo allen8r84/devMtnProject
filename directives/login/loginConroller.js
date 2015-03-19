@@ -71,14 +71,7 @@ app.controller('loginConroller', function ($scope, $location, $window, $firebase
 	}
 	
 	$scope.admin = function(role, id){
-	    debugger
-	    if(role === "sAdmin"){
-	        $location.path('./dashboard/' + id + '/admin');
-	    } else if (role === 'cService'){
-	        $location.path('./dashboard/' + id + '/admin');
-	    }else {
-	        $location.path('./dashboard/' + id);
-	    }
+	   loginService.adminRedirect(role, id);
 	}
 	
     

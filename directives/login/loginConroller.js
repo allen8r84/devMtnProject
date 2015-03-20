@@ -4,6 +4,7 @@ app.controller('loginConroller', function ($scope, $location, $window, $firebase
     var firebaseUrl = envService.getEnv().firebase;
     var authObject = $firebaseAuth(new Firebase(firebaseUrl));
     var moment = $window.moment;
+    $scope.reg2 = true;
     
     authObject.$onAuth(function(authData) {
         if (authData) {
@@ -67,12 +68,19 @@ app.controller('loginConroller', function ($scope, $location, $window, $firebase
 	};
 	
 	$scope.dashboard = function(){
-	    $location.path('/dashboard/' + $rootScope.loggedInUser.uid);
+	    var path = '/dashboard/' + $rootScope.loggedInUser.uid;
+	    if($location.path() === path){
+	        $scope.reg2 = true;
+	    }else{
+	       $location.path('/dashboard/' + $rootScope.loggedInUser.uid);
+	       $scope.reg2 = true;
+	    }
 	}
 	
-	$scope.admin = function(role, id){
-	   loginService.adminRedirect(role, id);
-	}
+	$scope.isadmin = function(role){
+        $scope.reg2 = false;
+    }
+	
 	
     
     

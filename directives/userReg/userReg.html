@@ -1,21 +1,23 @@
 <div class="container">
+    
+    <h4>User Dashboard</h4>
     <div role="tabpanel">
         
         <!-- Nav tabs -->
         <ul class="nav nav-tabs" role="tablist">
-            <li role="presentation" class="active"><a href="./{{user.uid}}/admin/#Users" aria-controls="home" role="tab" data-toggle="tab">Users</a></li>
-            <li role="presentation"><a href="./{{user.uid}}/admin/#Mas_Messages" aria-controls="profile" role="tab" data-toggle="tab">Mas Messages</a></li>
-            <li role="presentation"><a href="./{{user.uid}}/admin/#User_Messages" aria-controls="messages" role="tab" data-toggle="tab">User Messages</a></li>
-            <li role="presentation"><a href="./{{user.uid}}/admin/#Create_Courses" aria-controls="settings" role="tab" data-toggle="tab">Create Courses</a></li>
+            <li role="presentation" class="active"><a href="./{{user.uid}}/#account" aria-controls="home" role="tab" data-toggle="tab">Account</a></li>
+            <li role="presentation"><a href="./{{user.uid}}/#profile" aria-controls="profile" role="tab" data-toggle="tab">Profile</a></li>
+            <li role="presentation"><a href="./{{user.uid}}/#messages" aria-controls="messages" role="tab" data-toggle="tab">Messages</a></li>
+            <li role="presentation"><a href="./{{user.uid}}/#courses" aria-controls="settings" role="tab" data-toggle="tab">Courses</a></li>
         </ul>
         
         <!-- Tab panes -->
         <div class="tab-content">
-            <div role="tabpanel" class="tab-pane active" id="Users">
+            <div role="tabpanel" class="tab-pane active" id="account">
                 <h3>Welcome, {{user.fName}}</h3>
                 <div>To get started select one of the tabs above.<br/>If you'd like to look over available courses and register to take any, click on the "Courses" Tab.<br/> Click on the messages tab to see any general site messages or to contact us directly.</div>
             </div>
-            <div role="tabpanel" class="tab-pane" id="Mas_Messages">
+            <div role="tabpanel" class="tab-pane" id="profile">
                 <h3>{{user.fName}} {{user.lName}}</h3>
                 <h4>Email: {{user.email}}</h4>
                 <h5>Last Logged on: {{user.lastLogon | date: format}} - {{}}</h5>
@@ -27,10 +29,10 @@
                 <hr/>
                 <h4>Address:</h4>
             </div>
-            <div role="tabpanel" class="tab-pane" id="User_Messages">
+            <div role="tabpanel" class="tab-pane" id="messages">
                 Test 3
             </div>
-            <div role="tabpanel" class="tab-pane" id="Create_Courses">
+            <div role="tabpanel" class="tab-pane" id="courses">
                 Test 4
             </div>
         </div>

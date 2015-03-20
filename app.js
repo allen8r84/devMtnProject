@@ -24,7 +24,7 @@ app.config(function($routeProvider){
     templateUrl: 'landing/landing.html',
     controller: 'landController'
   })
-  .when('/dashboard',{
+/*  .when('/dashboard',{
       templateUrl: 'authUser/authUser.html',
       controller: 'userController',
       resolve: {
@@ -32,24 +32,24 @@ app.config(function($routeProvider){
               return Auth.$requireAuth();
           }
         }
-  })
+  })*/
   .when('/dashboard/:userId',{
       templateUrl: 'authUser/authUser.html',
       controller: 'userController',
       resolve: {
+          "currentauth": function(Auth){
+              return Auth.$requireAuth();
+          },
           "user": function(authUserService, envService, $firebaseObject, Auth){
               var fbrul = envService.getEnv().firebase;
               var authData = Auth.$getAuth();
               var fbuserID = $firebaseObject(new Firebase(fbrul + '/users/' + authData.uid));
               var uid = fbuserID.$id;
               return authUserService.getUser(uid);
-          },
-          "currentauth": function(Auth){
-              return Auth.$requireAuth();
           }
         }
   })
-  .when('/dashboard/:userId/admin', {
+/*  .when('/dashboard/:userId/admin', {
         templateUrl: 'adminUser/adminUser.html',
         controller: 'adminController',
         resolve: {
@@ -62,7 +62,7 @@ app.config(function($routeProvider){
           }  
         }
       
-  })  
+  }) */ 
   .otherwise({
     redirectTo: '/'
   });

@@ -2,7 +2,7 @@ var app = angular.module('estateLMS');
 
 app.service('loginService', function(envService, $firebaseObject, $timeout, $rootScope, $location){
     var firebaseUrl = envService.getEnv().firebase; 
-    var adminRoles = ["sAdmin", "cService"];
+    
     
     this.registerUser = function(email, authData, fName, lName){
         	var userEmail = email;
@@ -28,14 +28,4 @@ app.service('loginService', function(envService, $firebaseObject, $timeout, $roo
 			});
     }
     
-    this.adminRedirect = function(role, id){
-        for(var i = 0; i < adminRoles.length; i++) {
-            if(role === adminRoles[i]){
-    	        $location.path('/dashboard/' + id + '/admin');
-    	        break
-    	    } else {
-    	        $location.path('/dashboard/' + id);
-    	    }
-	    }
-    }
 });

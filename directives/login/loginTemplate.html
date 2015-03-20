@@ -1,5 +1,5 @@
 <!-- Login view -->
-<li class="nav pull-right dropdown" id="menuLogin" ng-show="!loggedInUser">
+<li class="nav pull-right dropdown" id="menuLogin" ng-if="!loggedInUser">
     <a class="dropdown-toggle btn-group" href="#" data-toggle="dropdown" id="navLogin">Login</a>
     <div class="dropdown-menu" style="padding:10px; margin:10px" ng-click="$event.stopPropagation()">
         <form name="loginForm" class="form" id="formLogin" ng-submit="logIn(email, password)"> 
@@ -13,7 +13,7 @@
         </form>
         <!-- Registration View -->
         <hr></hr><a href="" ng-click="showReg()"> New User? Click to register...</a>
-        <form name="regForm" class="form" id="formRegister" ng-submit="register(emailr, passwordr)" ng-show="reg"> 
+        <form name="regForm" class="form" id="formRegister" ng-submit="register(emailr, passwordr)" ng-if="reg"> 
             <input name="fName" id="fName" type="fName" placeholder="First Name" ng-model="fName" required></input>
             <input name="lName" id="lName" type="lName" placeholder="Last Name" ng-model="lName" required></input>
             <input name="Email" id="email" type="email" placeholder="Email" ng-model="emailr" required/> 
@@ -29,11 +29,11 @@
 
 
 <!-- Logout View -->
-<li class="nav pull-right dropdown" id="menuLogout" ng-show="loggedInUser">
+<li class="nav pull-right dropdown" id="menuLogout" ng-if="loggedInUser">
     <a class="dropdown-toggle btn-group" href="#" data-toggle="dropdown" id="navLogout"><strong>Logged in as: {{loggedInUser.fName}}</strong></a>
     <div class="dropdown-menu" style="padding:10px; margin:10px">
         <a href="" ng-click="dashboard()">Dashboard</a><br /><hr></hr>
-        <a href="" ng-click="isadmin(loggedInUser.role)" ng-show="loggedInUser.role === 'sAdmin' || loggedInUser.role === 'cService'">Admin</a><hr ng-show="loggedInUser.role === 'sAdmin' || loggedInUser.role === 'cService'"></hr>
+        <a href="" ng-click="isadmin(loggedInUser.role)" ng-if="loggedInUser.role === 'sAdmin' || loggedInUser.role === 'cService'">Admin</a><hr ng-if="loggedInUser.role === 'sAdmin' || loggedInUser.role === 'cService'"></hr>
         <a href="" ng-click="logOut()">Logout</a>    
     </div>
 </li>

@@ -24,45 +24,50 @@ app.config(function($routeProvider){
     templateUrl: 'landing/landing.html',
     controller: 'landController'
   })
-/*  .when('/dashboard',{
-      templateUrl: 'authUser/authUser.html',
-      controller: 'userController',
-      resolve: {
-          "currentauth": function(Auth){
-              return Auth.$requireAuth();
-          }
-        }
-  })*/
   .when('/dashboard/:userId',{
       templateUrl: 'authUser/authUser.html',
       controller: 'userController',
       resolve: {
-          "currentauth": function(Auth){
+          currentauth: function(Auth){
               return Auth.$requireAuth();
           },
-          "user": function(authUserService, envService, $firebaseObject, Auth){
+          user: function(authUserService, envService, $firebaseObject, Auth){
               var fbrul = envService.getEnv().firebase;
               var authData = Auth.$getAuth();
               var fbuserID = $firebaseObject(new Firebase(fbrul + '/users/' + authData.uid));
               var uid = fbuserID.$id;
               return authUserService.getUser(uid);
+          },
+          groupMessage: function(authUserService) {
+              return authUserService.groupMessages();
+          },
+          courses: function(coursesService){
+              return coursesService.getCourses();
           }
         }
   })
-/*  .when('/dashboard/:userId/admin', {
-        templateUrl: 'adminUser/adminUser.html',
-        controller: 'adminController',
-        resolve: {
-          "user": function(authUserService, envService, $firebaseObject, Auth){
+    .when('/dashboard/:userId/:courseName',{
+      templateUrl: '/courses/courses.html',
+      controller: 'coursesController',
+      resolve: {
+          currentauth: function(Auth){
+              return Auth.$requireAuth();
+          },
+          user: function(coursesService, envService, $firebaseObject, Auth){
               var fbrul = envService.getEnv().firebase;
               var authData = Auth.$getAuth();
               var fbuserID = $firebaseObject(new Firebase(fbrul + '/users/' + authData.uid));
               var uid = fbuserID.$id;
-              return authUserService.getUser(uid);   
-          }  
+              return coursesService.getUser(uid);
+          },
+          courses: function(coursesService){
+              return coursesService.getCourses();
+          },
+          aCourse: function(coursesService, $route) {
+              return coursesService.getACourse($route.current.params.courseName);
+          }
         }
-      
-  }) */ 
+    })
   .otherwise({
     redirectTo: '/'
   });

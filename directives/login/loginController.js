@@ -1,6 +1,6 @@
 var app = angular.module('estateLMS');
 
-app.controller('loginConroller', function ($scope, $location, $window, $firebaseAuth, envService, loginService, $rootScope, $firebaseObject, $timeout) {
+app.controller('loginController', function ($scope, $location, $window, $firebaseAuth, envService, loginService, $rootScope, $firebaseObject, $timeout) {
     var firebaseUrl = envService.getEnv().firebase;
     var authObject = $firebaseAuth(new Firebase(firebaseUrl));
     var moment = $window.moment;

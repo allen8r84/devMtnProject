@@ -9,7 +9,7 @@ app.directive('loginService', function($location){
     return {
         restrict: 'EA',
         templateUrl: './directives/login/loginTemplate.html',
-        controller: 'loginConroller',
+        controller: 'loginController',
         link: link
     }
 });

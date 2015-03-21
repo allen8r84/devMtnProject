@@ -30,10 +30,20 @@
                 <h4>Address:</h4>
             </div>
             <div role="tabpanel" class="tab-pane" id="messages">
-                Test 3
+                <div class="col-md-6 groupMessageArea">
+                    <div ng-repeat="gmessage in groupMessage">
+                        <span><h3>{{gmessage.title}}</h3></span><br/>
+                        <span>{{gmessage.time | date: 'MMM-d-yy h:mm'}}</span><br/>
+                        <span>{{gmessage.message}}</span><br/>
+                        <span>~<em>{{gmessage.author}}</em></span>
+                        <hr/>
+                    </div>
+                </div>
             </div>
             <div role="tabpanel" class="tab-pane" id="courses">
-                Test 4
+                <div ng-repeat="course in courses">
+                    <span><h3><strong>{{course.$id}}</strong> -<em><a href="" ng-click="goToCourses(course.$id)">Take this course!</a></em></h3></span>
+                </div>
             </div>
         </div>
         

@@ -63,7 +63,7 @@ app.config(function($routeProvider){
           courses: function(coursesService){
               return coursesService.getCourses();
           },
-          aCourse: function(coursesService, $route) {
+          aCourse: function(coursesService, $route, envService) {
               return coursesService.getACourse($route.current.params.courseName);
           }
         }

@@ -16,6 +16,7 @@ app.factory('Auth', function($firebaseAuth, envService) {
     var ref = new Firebase(envService.getEnv().firebase);
     return $firebaseAuth(ref);
   });
+  
 
 app.config(function($routeProvider){
   //router here

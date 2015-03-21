@@ -21,6 +21,7 @@
         </li>
     </ul>
     <div class="col-xs-2">
-        <button type="button" id="btnLogin" class="btn btn-info btn-block" ng-click="nextSlide(aCourse[i].title)">Next</button>
+        <button type="button" id="btnLogin" class="btn btn-info btn-block" ng-click="nextSlide(aCourse[i].title)" ng-disabled="next===false" ng-if="counter!=='Finished!'">{{counter}}</button>
+        <button type="button" id="btnLogin" class="btn btn-info btn-block" ng-click="coursesPage()" ng-disabled="next===false" ng-if="counter==='Finished!'">{{counter}}</button>
     </div>
 </div>

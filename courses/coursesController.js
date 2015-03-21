@@ -70,6 +70,7 @@ app.controller('coursesController', function($scope, user, courses, $timeout, $l
     var mytimeout = $timeout($scope.onTimeout,1000);
     
     $scope.coursesPage = function(){
+        alert("Congratulations!\nYou finished this course.\nPress OK to go back to your dashboard and view otheavailable courses.")
         var path = $location.path('/dashboard/' + $scope.uid);
     };
 

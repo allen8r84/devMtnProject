@@ -14,6 +14,10 @@ app.service('coursesService', function(envService, $firebaseObject, $timeout, $r
     this.getACourse = function(course){
         return $firebaseArray(new Firebase(firebaseUrl + '/courses/state/ut/' + course));
     }
+    
+    this.userCourses = function(userId){
+        return $firebaseArray(new Firebase(firebaseUrl + '/users/' + userId + '/courses'));
+    }
 
 });
 

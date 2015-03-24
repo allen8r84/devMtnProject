@@ -35,10 +35,9 @@ app.controller('coursesController', function($scope, user, courses, $timeout, $l
         $scope.next = false
     };
     $scope.nextTrue = function(){
-        $scope.nextTime = time;
         $timeout(function(){
             $scope.next = true;
-        },$scope.nextTime * 1000);
+        },time * 1000);
     }
     $scope.setNext();
     $scope.nextTrue();
@@ -46,10 +45,6 @@ app.controller('coursesController', function($scope, user, courses, $timeout, $l
     
     $scope.nextSlide = function(){
         if($scope.i < ($scope.numSlides - 1)){
-            $scope.i++;
-            $scope.setNext();
-            $scope.nextTrue();
-            $scope.counter = time;
 
         }else{
             $scope.i = 0;
@@ -63,15 +58,7 @@ app.controller('coursesController', function($scope, user, courses, $timeout, $l
 //Previous Button - needs:
 //Be available to click & go back to previous slide
     $scope.backSlide = function(){
-        if($scope.i === 0){
-            $scope.i = 0;
-            $scope.counter = time;
-            
-        }else if($scope.i > 0){
-            $scope.i--;
-            $scope.counter = time;
-            $scope.next = true;
-        }
+        
     };
 //End of Previous Button
 

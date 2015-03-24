@@ -1,10 +1,9 @@
 var app = angular.module('estateLMS');
 
-app.controller('coursesController', function($scope, user, courses, $timeout, $location, aCourse, envService, $firebaseObject, $rootScope){
-    
+app.controller('coursesController', function($scope, user, courses, $timeout, $location, aCourse, envService, $firebaseObject, $rootScope, $log){
 //pre-defined and pre-loaded variables    
     var firebaseUrl = envService.getEnv().firebase; 
-    var time = 7; //set slide timer for questions
+    var time = 5; //set slide timer for questions
     
     $scope.i = 0;
     
@@ -26,6 +25,8 @@ app.controller('coursesController', function($scope, user, courses, $timeout, $l
             courseArray.push(aCourse[i]);
         }
         $scope.currentCourse = courseArray;
+        $scope.totalItems = aCourse.length * 10; //pagination
+        
     });
 //end of pre-defined and pre-loaded variables    
     
@@ -34,20 +35,17 @@ app.controller('coursesController', function($scope, user, courses, $timeout, $l
     $scope.setNext = function(){
         $scope.next = false
     };
-    $scope.nextTrue = function(){
-        $timeout(function(){
-            $scope.next = true;
-        },time * 1000);
-    }
     $scope.setNext();
-    $scope.nextTrue();
-    
     
     $scope.nextSlide = function(){
-        if($scope.i < ($scope.numSlides - 1)){
-
+        if($scope.i < ($scope.numSlides - 2)){
+            $scope.i++;
+            $scope.counter = null;
+            $scope.currentPage = $scope.i + 1;
         }else{
-            $scope.i = 0;
+           $scope.i++;
+           $scope.currentPage = $scope.i + 1;
+           $scope.counter = "Finished!"
             
         }
     }
@@ -58,6 +56,19 @@ app.controller('coursesController', function($scope, user, courses, $timeout, $l
 //Previous Button - needs:
 //Be available to click & go back to previous slide
     $scope.backSlide = function(){
+        if($scope.i <= 0){
+            $scope.i = 0;
+            $scope.currentPage = $scope.i + 1;
+            if($scope.counter === null){
+                $scope.counter = null;
+            }else {
+                $scope.counter = time;
+            }
+        }else if($scope.i > 0){
+            $scope.i--;
+            $scope.counter = time;
+            $scope.currentPage = $scope.i + 1;
+        } 
         
     };
 //End of Previous Button
@@ -72,18 +83,18 @@ app.controller('coursesController', function($scope, user, courses, $timeout, $l
         }
         else if($scope.i < ($scope.numSlides - 1)) {
             $scope.i++;
-            $scope.setNext();
-            $scope.nextTrue();
             $scope.counter = time + 1;
             $scope.onTimeout();
+            $scope.currentPage = $scope.i + 1;
         }
         else {
             $scope.counter = "Finished!"
+            $scope.next = true;
         }
     }
     var mytimeout = $timeout($scope.onTimeout,1000);
-//end of timer for next button   
-    
+//end of timer for next button
+
     
 //Course Finished alert    
     $scope.coursesPage = function(){

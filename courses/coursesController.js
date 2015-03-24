@@ -31,9 +31,10 @@ app.controller('coursesController', function($scope, user, courses, $timeout, $l
     $scope.setNext = function(){
         $scope.next = false
     };
-    $scope.nextTrue = function(){$timeout(function(){
-        $scope.next = true;
-    },time * 1000);
+    $scope.nextTrue = function(){
+        $timeout(function(){
+            $scope.next = true;
+        },time * 1000);
     }
     $scope.setNext();
     $scope.nextTrue();
@@ -41,7 +42,7 @@ app.controller('coursesController', function($scope, user, courses, $timeout, $l
     
     
     
-    $scope.nextSlide = function(curSlide){
+    $scope.nextSlide = function(){
         if($scope.i < ($scope.numSlides - 1)){
             $scope.i++;
             $scope.setNext();

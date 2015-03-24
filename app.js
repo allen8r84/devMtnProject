@@ -1,4 +1,4 @@
-var app = angular.module('estateLMS',['firebase', 'ngRoute']);
+var app = angular.module('estateLMS',['firebase', 'ngRoute', 'ui.bootstrap']);
 
 app.run(function($rootScope, $location, envService) {
     $rootScope.$on("$routeChangeError", function(event, next, previous, error) {

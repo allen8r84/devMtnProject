@@ -23,7 +23,7 @@
                 <h5>Last Logged on: {{user.lastLogon | date: format}} - {{}}</h5>
                 <div class="row">
                     <div class="col-xs-2">
-                        <button type="button" id="btnLogin" class="btn btn-info btn-block">Edit</button>
+                        <button type="button" id="btnLogin" class="btn btn-info btn-block" disabled>Edit</button>
                     </div>
                 </div>
                 <hr/>
@@ -41,8 +41,19 @@
                 </div>
             </div>
             <div role="tabpanel" class="tab-pane" id="courses">
-                <div ng-repeat="course in courses">
-                    <span><h3><strong>{{course.$id}}</strong> -<em><a href="" ng-click="goToCourses(course.$id)">Take this course!</a></em></h3></span>
+                <div class="row">
+                    <div class="col-xs-12 col-md-6">
+                       <div><h2>My Course</h2></div>
+                       <div ng-repeat="course in courses">
+                           <span><h3><strong>{{course.$id}}</strong> -- <em><input type="checkbox">Add this course to Basket</input></em> and here is some text to test the colum spans with bootstrap classes.</h3></span>
+                       </div>
+                   </div>
+                    <div class="col-xs-12 col-md-6">
+                        <div><h2>All Site Available Course</h2></div>
+                        <div ng-repeat="course in courses">
+                            <span><h3><strong>{{course.$id}}</strong> -- <em><input type="checkbox">Add this course to Basket</input></em> and here is some text to test the colum spans with bootstrap classes.</h3></span>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

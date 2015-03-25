@@ -44,7 +44,19 @@ app.controller('coursesController', function($scope, user, courses, $timeout, $l
     
     $scope.nextSlide = function(){
         if($scope.i < ($scope.numSlides - 2)){
-            if($scope.pb <= $scope.i){
+            //pb = 2 & i = 0
+            //if statement to check if next click goes to an uncompleted slide
+            if($scope.pb === ($scope.i + 1)){
+                $scope.mytimeout = $timeout($scope.onTimeout,1000); //restart timer if slide hasn't been completed yet
+                $scope.counter = time;
+                $scope.setNext();
+                $scope.i++;
+            }else if($scope.pb > ($scope.i + 1)) {
+                $scope.i++;
+            }
+            
+            
+            /*if($scope.pb <= $scope.i){
                 $scope.pb++
             }
             $scope.i++;
@@ -56,7 +68,8 @@ app.controller('coursesController', function($scope, user, courses, $timeout, $l
            $scope.i++;
            $scope.counter = "Finished!"
             
-        }
+        }*/
+    }
     }
     
 //end of Next button functionality    
@@ -65,14 +78,11 @@ app.controller('coursesController', function($scope, user, courses, $timeout, $l
 //Previous Button - needs:
 //Be available to click & go back to previous slide
     $scope.backSlide = function(){
-        if($scope.i <= 0){
-            $scope.i = 0;
-            
-        }else if($scope.i > 0){
             $scope.i--;
-            $scope.counter = time;
-        } 
-        
+            /*$scope.counter = time;*/
+            $scope.next = true;
+            $timeout.cancel($scope.mytimeout);
+            $scope.counter = null;    
     };
 //End of Previous Button
 

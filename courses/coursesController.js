@@ -6,6 +6,7 @@ app.controller('coursesController', function($scope, user, courses, $timeout, $l
     var time = 5; //set slide timer for questions
     
     $scope.i = 0;
+    $scope.pb = $scope.i;
     
     var user = user;
     user.$bindTo($scope, 'user')
@@ -17,17 +18,23 @@ app.controller('coursesController', function($scope, user, courses, $timeout, $l
     $scope.courses = courses;
     $scope.aCourse = aCourse;
     
-    var courseArray = [];
+    $scope.courseArray = [];
     
     $scope.aCourse.$loaded().then(function(){
         $scope.numSlides = aCourse.length;
         for(var i = 0; i < $scope.numSlides; i++){
-            courseArray.push(aCourse[i]);
+            $scope.courseArray.push(aCourse[i]);
         }
-        $scope.currentCourse = courseArray;
-        $scope.totalItems = aCourse.length * 10; //pagination
-        
+        $scope.currentCourse = $scope.courseArray;
+        $scope.totalItems = aCourse.length; //pagination
+        $scope.max = aCourse.length;
+        $scope.percent = 100 / $scope.max;
+            console.log($rootScope.curCorLen);
+
     });
+                console.log($rootScope.curCorLen);
+
+
 //end of pre-defined and pre-loaded variables    
     
     
@@ -39,12 +46,12 @@ app.controller('coursesController', function($scope, user, courses, $timeout, $l
     
     $scope.nextSlide = function(){
         if($scope.i < ($scope.numSlides - 2)){
+            $scope.pb++;
             $scope.i++;
             $scope.counter = null;
-            $scope.currentPage = $scope.i + 1;
         }else{
+           $scope.pb++;
            $scope.i++;
-           $scope.currentPage = $scope.i + 1;
            $scope.counter = "Finished!"
             
         }
@@ -58,7 +65,6 @@ app.controller('coursesController', function($scope, user, courses, $timeout, $l
     $scope.backSlide = function(){
         if($scope.i <= 0){
             $scope.i = 0;
-            $scope.currentPage = $scope.i + 1;
             if($scope.counter === null){
                 $scope.counter = null;
             }else {
@@ -67,7 +73,6 @@ app.controller('coursesController', function($scope, user, courses, $timeout, $l
         }else if($scope.i > 0){
             $scope.i--;
             $scope.counter = time;
-            $scope.currentPage = $scope.i + 1;
         } 
         
     };
@@ -82,12 +87,13 @@ app.controller('coursesController', function($scope, user, courses, $timeout, $l
             mytimeout = $timeout($scope.onTimeout,1000);
         }
         else if($scope.i < ($scope.numSlides - 1)) {
+            $scope.pb++;
             $scope.i++;
             $scope.counter = time + 1;
             $scope.onTimeout();
-            $scope.currentPage = $scope.i + 1;
         }
         else {
+            $scope.pb++;
             $scope.counter = "Finished!"
             $scope.next = true;
         }

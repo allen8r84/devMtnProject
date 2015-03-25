@@ -1,6 +1,8 @@
 <div class="container">
     <div class="text-center">
-        <pagination direction-links="false" total-items="totalItems" ng-model="currentPage" num-pages="smallnumPages"></pagination>
+        <em>Current Course Progress</em>
+        <progressbar ng-if="max" value="percent * (pb)" type="success" class="progress-striped active">{{percent * (pb)}}%</progressbar>
+        <hr/>
     </div>
     
     <div><h1>{{currentCourse[i].title}}</h1></div>

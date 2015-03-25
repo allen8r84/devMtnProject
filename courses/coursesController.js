@@ -26,13 +26,11 @@ app.controller('coursesController', function($scope, user, courses, $timeout, $l
             $scope.courseArray.push(aCourse[i]);
         }
         $scope.currentCourse = $scope.courseArray;
-        $scope.totalItems = aCourse.length; //pagination
-        $scope.max = aCourse.length;
-        $scope.percent = 100 / $scope.max;
-            console.log($rootScope.curCorLen);
+        $scope.max = aCourse.length; //max value for progress bar
+        $scope.percent = 100 / $scope.max; //setting progress bar slide value
+        $scope.mytimeout = $timeout($scope.onTimeout,1000);//start slide timer at content load
 
     });
-                console.log($rootScope.curCorLen);
 
 
 //end of pre-defined and pre-loaded variables    
@@ -46,11 +44,15 @@ app.controller('coursesController', function($scope, user, courses, $timeout, $l
     
     $scope.nextSlide = function(){
         if($scope.i < ($scope.numSlides - 2)){
-            $scope.pb++;
+            if($scope.pb <= $scope.i){
+                $scope.pb++
+            }
             $scope.i++;
             $scope.counter = null;
         }else{
-           $scope.pb++;
+           if($scope.pb <= $scope.i){
+                $scope.pb++
+            }
            $scope.i++;
            $scope.counter = "Finished!"
             
@@ -65,11 +67,7 @@ app.controller('coursesController', function($scope, user, courses, $timeout, $l
     $scope.backSlide = function(){
         if($scope.i <= 0){
             $scope.i = 0;
-            if($scope.counter === null){
-                $scope.counter = null;
-            }else {
-                $scope.counter = time;
-            }
+            
         }else if($scope.i > 0){
             $scope.i--;
             $scope.counter = time;
@@ -84,21 +82,24 @@ app.controller('coursesController', function($scope, user, courses, $timeout, $l
     $scope.onTimeout = function(){
         $scope.counter--;
         if ($scope.counter > 0) {
-            mytimeout = $timeout($scope.onTimeout,1000);
+            $scope.mytimeout = $timeout($scope.onTimeout,1000);
         }
         else if($scope.i < ($scope.numSlides - 1)) {
-            $scope.pb++;
+            if($scope.pb <= $scope.i){
+                $scope.pb++
+            }
             $scope.i++;
             $scope.counter = time + 1;
             $scope.onTimeout();
         }
         else {
-            $scope.pb++;
+            if($scope.pb <= $scope.i){
+                $scope.pb++
+            }
             $scope.counter = "Finished!"
             $scope.next = true;
         }
     }
-    var mytimeout = $timeout($scope.onTimeout,1000);
 //end of timer for next button
 
     

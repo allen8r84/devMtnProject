@@ -27,12 +27,34 @@
         </li>
     </ul>
     <div class="row">
-        <div class="col-xs-3 col-md-2">
+        <div class="col-xs-6 col-md-4">
             <button type="button" id="btnLogin" class="btn btn-info btn-block" ng-click="backSlide()">&lt; Previous</button>
         </div>
-        <div class="col-xs-3 col-md-2">
+        <div class="col-xs-6 col-md-4">
             <button type="button" id="btnLogin" class="btn btn-info btn-block" ng-click="nextSlide()" ng-disabled="next===false" ng-if="counter!=='Finished!'">{{counter}} Next ></button>
             <button type="button" id="btnLogin" class="btn btn-info btn-block" ng-click="coursesPage()" ng-disabled="next===false" ng-if="counter==='Finished!'">{{counter}}</button>
         </div>
     </div>
+</div>
+
+<!-- Modal for Quizes goes here -->
+<div ng-controller="modalController" >
+    <script type="text/ng-template" id="myModalContent.html">
+        <div class="modal-header">
+            <h3 class="modal-title">Test Your Knowledge</h3>
+        </div>
+        <div class="modal-body">
+            <ul>
+                <li ng-repeat="item in items">
+                    <a ng-click="selected.item = item">{{ item }}</a>
+                </li>
+            </ul>
+            Selected: <b>{{ selected.item }}</b>
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-primary" ng-click="ok()">Submit</button>
+        </div>
+    </script>
+    
+    <button class="btn btn-default" ng-click="open()">Open me!</button>
 </div>

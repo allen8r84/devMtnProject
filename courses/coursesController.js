@@ -3,8 +3,8 @@ var app = angular.module('estateLMS');
 app.controller('coursesController', function($scope, user, courses, $timeout, $location, aCourse, envService, $firebaseObject, $rootScope, $log, $modal){
 //pre-defined and pre-loaded variables    
     var firebaseUrl = envService.getEnv().firebase; 
-    var time = 2; //set slide timer for questions
-    var quizFreq = 2; //set after how many slides a quiz should be fired
+    var time = 1; //set slide timer for questions
+    var quizFreq = 20; //set after how many slides a quiz should be fired
     
     $scope.i = 0;
     $scope.pb = $scope.i;
@@ -30,7 +30,7 @@ app.controller('coursesController', function($scope, user, courses, $timeout, $l
         $scope.max = aCourse.length; //max value for progress bar
         $scope.percent = 100 / $scope.max; //setting progress bar slide value
         $scope.mytimeout = $timeout($rootScope.onTimeout,1000);//start slide timer at content load
-
+        $scope.bigTotalItems = $scope.max;
     });
 
 //end of pre-defined and pre-loaded variables    
@@ -81,7 +81,6 @@ app.controller('coursesController', function($scope, user, courses, $timeout, $l
 
 //timer for next button - has a countdown displayed until next slide.    
     $rootScope.counter = time;
-    $scope.ngifQuiz = true;
     $rootScope.onTimeout = function(){
 
         $rootScope.counter--;
@@ -99,6 +98,7 @@ app.controller('coursesController', function($scope, user, courses, $timeout, $l
             if($scope.i % quizFreq === 0) {
                 $scope.open();
             }
+            $scope.progDisplay = parseInt($scope.percent * $scope.pb)
         }
         else {
             if($scope.pb <= $scope.i){
@@ -107,7 +107,7 @@ app.controller('coursesController', function($scope, user, courses, $timeout, $l
             $rootScope.counter = "Finished!"
             $scope.next = true;
             $scope.open();
-            
+            $scope.progDisplay = $scope.percent * $scope.pb;
         }
     }
 //end of timer for next button
@@ -144,4 +144,17 @@ app.controller('coursesController', function($scope, user, courses, $timeout, $l
       $log.info('Modal dismissed at: ' + new Date());
     });
   };
+  
+//end modal controller  
+  
+  
+//pagination for slides
+  $scope.maxSize = 7;
+  $scope.bigCurrentPage = 1;
+//end pagination for slides
+  
+  
+  
+  
+  
 });

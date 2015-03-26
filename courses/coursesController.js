@@ -1,10 +1,12 @@
 var app = angular.module('estateLMS');
 
 app.controller('coursesController', function($scope, user, courses, $timeout, $location, aCourse, envService, $firebaseObject, $rootScope, $log, $modal){
+
+
 //pre-defined and pre-loaded variables    
     var firebaseUrl = envService.getEnv().firebase; 
-    var time = 1; //set slide timer for questions
-    var quizFreq = 5; //set after how many slides a quiz should be fired
+    var time = 2; //set slide timer for questions
+    var quizFreq = 50; //set after how many slides a quiz should be fired
     
     $scope.i = 0;
     $scope.pb = $scope.i;
@@ -96,7 +98,7 @@ app.controller('coursesController', function($scope, user, courses, $timeout, $l
             $rootScope.onTimeout();
             //add in quiz modal
             if($scope.i % quizFreq === 0) {
-                $scope.open(lg);
+                $scope.open();
             }
             $scope.progDisplay = parseInt($scope.percent * $scope.pb)
         }
@@ -106,7 +108,7 @@ app.controller('coursesController', function($scope, user, courses, $timeout, $l
             }
             $rootScope.counter = "Finished!"
             $scope.next = true;
-            $scope.open(lg);
+            $scope.open();
             $scope.progDisplay = $scope.percent * $scope.pb;
         }
     }

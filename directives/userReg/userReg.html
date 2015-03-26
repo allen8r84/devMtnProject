@@ -31,7 +31,7 @@
             </div>
             <div role="tabpanel" class="tab-pane" id="messages">
                 <div class="col-md-6 col-xs-6 groupMessageArea">
-                    <div ng-repeat="gmessage in groupMessage | orderBy:title | limitTo:3">
+                    <div ng-repeat="gmessage in groupMessage | orderBy:reverse | limitTo:4">
                         <span><h3>{{gmessage.title}}</h3></span><br/>
                         <span>{{gmessage.time | date: 'MMM-d-yy h:mm'}}</span><br/>
                         <span><h4>{{gmessage.message}}</h4></span><br/>

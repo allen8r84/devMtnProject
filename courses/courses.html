@@ -1,10 +1,10 @@
 <div class="container">
     <div class="text-center">
+        <h1>{{courseTitle}}</h1>
         <em>Current Course Progress</em>
         <progressbar ng-if="max" value="percent * (pb)" type="success" class="progress-striped active">{{percent * (pb)}}%</progressbar>
         <hr/>
     </div>
-    
     <div><h1>{{currentCourse[i].title}}</h1></div>
     <ul>
         <li>
@@ -28,7 +28,7 @@
     </ul>
     <div class="row">
         <div class="col-xs-6 col-md-4">
-            <button type="button" id="btnLogin" class="btn btn-info btn-block" ng-click="backSlide()" ng-disabled="i<=0">&lt; Previous</button>
+            <button type="button" id="btnLogin" class="btn btn-info btn-block" ng-click="backSlide()" ng-disabled="i <= 0">&lt; Previous</button>
         </div>
         <div class="col-xs-6 col-md-4">
             <button type="button" id="btnLogin" class="btn btn-info btn-block" ng-click="nextSlide()" ng-disabled="next===false" ng-if="counter!=='Finished!'">{{counter}} Next ></button>
@@ -38,7 +38,7 @@
 </div>
 
 <!-- Modal for Quizes goes here -->
-<div ng-controller="modalController" >
+<div>
     <script type="text/ng-template" id="myModalContent.html">
         <div class="modal-header">
             <h3 class="modal-title">Test Your Knowledge</h3>
@@ -52,9 +52,7 @@
             Selected: <b>{{ selected.item }}</b>
         </div>
         <div class="modal-footer">
-            <button class="btn btn-primary" ng-click="ok()">Submit</button>
+            <input class="btn btn-primary" ng-click="ok()" value="Submit"></input>
         </div>
     </script>
-    
-    <button class="btn btn-default" ng-click="open()">Open me!</button>
 </div>

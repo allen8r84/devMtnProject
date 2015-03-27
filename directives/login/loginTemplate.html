@@ -33,7 +33,7 @@
     <a class="dropdown-toggle btn-group" href="#" data-toggle="dropdown" id="navLogout"><strong>Logged in as: {{loggedInUser.fName}}</strong></a>
     <div class="dropdown-menu" style="padding:10px; margin:10px">
         <a href="" ng-click="dashboard()">Dashboard</a><br /><hr></hr>
-        <a href="" ng-click="isadmin(loggedInUser.role)" ng-if="loggedInUser.role === 'sAdmin' || loggedInUser.role === 'cService'">Admin</a><hr ng-if="loggedInUser.role === 'sAdmin' || loggedInUser.role === 'cService'"></hr>
+        <a href="" ng-click="isadmin()" ng-if="loggedInUser.role === 'sAdmin' || loggedInUser.role === 'cService'">Admin</a><hr ng-if="loggedInUser.role === 'sAdmin' || loggedInUser.role === 'cService'"></hr>
         <a href="" ng-click="logOut()">Logout</a>    
     </div>
 </li>

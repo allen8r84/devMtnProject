@@ -1,6 +1,6 @@
 var app = angular.module('estateLMS');
 
-app.controller('loginController', function ($scope, $location, $window, $firebaseAuth, envService, loginService, $rootScope, $firebaseObject, $timeout) {
+app.controller('loginController', function ($scope, $location, $window, $firebaseAuth, envService, loginService, $rootScope, $firebaseObject, $timeout, registeredService) {
     var firebaseUrl = envService.getEnv().firebase;
     var authObject = $firebaseAuth(new Firebase(firebaseUrl));
     var moment = $window.moment;
@@ -50,12 +50,12 @@ app.controller('loginController', function ($scope, $location, $window, $firebas
 				password: password
 			});
 		}).then(function(authData) {
-            /*loginService.registerUser(email, authData, $rootScope.fName, $rootScope.lName);
+            loginService.registerUser(email, authData, $rootScope.fName, $rootScope.lName);
             var user = $firebaseObject(new Firebase(firebaseUrl + "/users/" + authData.uid));
             user.$loaded().then(function(user){
                 var uid = user.uid;
                 $location.path('/dashboard/' + uid)
-            })*/
+            })
 		}, function(error) {
 			
 			/*console.log('error', error);*/
@@ -63,9 +63,9 @@ app.controller('loginController', function ($scope, $location, $window, $firebas
 	};
 	
 	$scope.logOut = function() {
-	    authObject.$unauth();
+	    registeredService.unRegister();
 	    delete $rootScope.loggedInUser;
-	    $location.path('/');
+	    authObject.$unauth();
 	};
 	
 	$scope.dashboard = function(){
@@ -78,7 +78,10 @@ app.controller('loginController', function ($scope, $location, $window, $firebas
 	    }
 	}
 	
-	$scope.isadmin = function(role){
+	$scope.isadmin = function(){
+        if($location.path() !== '/dashboard/' + $rootScope.loggedInUser.uid){
+            $location.path('/dashboard/' + $rootScope.loggedInUser.uid);
+        }
         $scope.reg2 = false;
     }
 	

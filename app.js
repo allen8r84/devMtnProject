@@ -1,6 +1,6 @@
 var app = angular.module('estateLMS',['firebase', 'ngRoute', 'ui.bootstrap']);
 
-app.run(function($rootScope, $location, envService) {
+app.run(function($rootScope, $location, envService, Auth, loginService, $firebaseObject, registeredService, $timeout) {
     $rootScope.$on("$routeChangeError", function(event, next, previous, error) {
       // We can catch the error thrown when the $requireAuth promise is rejected
       // and redirect the user back to the home page
@@ -9,10 +9,37 @@ app.run(function($rootScope, $location, envService) {
         $location.path('/');
       }
     });
+    //stop Quiz Timer when leaving the course training url
+    $rootScope.$on('$routeChangeStart', function(event, next, previous, error){
+        $timeout.cancel($rootScope.mytimeout);
+    });
+    var firebaseUrl = envService.getEnv().firebase;
+    Auth.$onAuth(function(authData) {
+        if (authData) {
+            console.log("Logged in as:", authData.uid);
+            $firebaseObject(new Firebase(firebaseUrl + "/users/" + authData.uid)).$loaded().then(function(user){
+                if(!user || !user.uid){
+                    user.email = authData.password.email;
+                    user.uid = authData.uid;
+                    user.role = 'uUser';
+                    user.$save().then(function(success) {
+     					console.log('success', success);
+     				}, function(error) {
+     					console.log('error', error);
+     				});
+                   
+                }
+            });
+        }else {
+        console.log("Logged out");
+            registeredService.unRegister();
+  }
+});
     $rootScope.brandTitle = envService.getEnv().brandTitle;
+    
 });
 
-app.factory('Auth', function($firebaseAuth, envService) {
+app.service('Auth', function($firebaseAuth, envService) {
     var ref = new Firebase(envService.getEnv().firebase);
     return $firebaseAuth(ref);
   });

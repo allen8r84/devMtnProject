@@ -2,11 +2,10 @@ var app = angular.module('estateLMS');
 
 app.controller('coursesController', function($scope, user, courses, $timeout, $location, aCourse, envService, $firebaseObject, $rootScope, $log, $modal){
 
-
 //pre-defined and pre-loaded variables    
     var firebaseUrl = envService.getEnv().firebase; 
     var time = 2; //set slide timer for questions
-    var quizFreq = 50; //set after how many slides a quiz should be fired
+    var quizFreq = 4; //set after how many slides a quiz should be fired
     
     $scope.i = 0;
     $scope.pb = $scope.i;
@@ -31,7 +30,7 @@ app.controller('coursesController', function($scope, user, courses, $timeout, $l
         $scope.currentCourse = $scope.courseArray;
         $scope.max = aCourse.length; //max value for progress bar
         $scope.percent = 100 / $scope.max; //setting progress bar slide value
-        $scope.mytimeout = $timeout($rootScope.onTimeout,1000);//start slide timer at content load
+        $rootScope.mytimeout = $timeout($rootScope.onTimeout,1000);//start slide timer at content load
         $scope.bigTotalItems = $scope.max;
     });
 
@@ -50,7 +49,7 @@ app.controller('coursesController', function($scope, user, courses, $timeout, $l
             //pb = 2 & i = 0
             //if statement to check if next click goes to an uncompleted slide
             if($scope.pb === ($scope.i + 1)){
-                $scope.mytimeout = $timeout($rootScope.onTimeout,1000); //restart timer if slide hasn't been completed yet
+                $rootScope.mytimeout = $timeout($rootScope.onTimeout,1000); //restart timer if slide hasn't been completed yet
                 $rootScope.counter = time;
                 $scope.setNext();
                 $scope.i++;
@@ -75,7 +74,7 @@ app.controller('coursesController', function($scope, user, courses, $timeout, $l
             $scope.i--;
             /*$rootScope.counter = time;*/
             $scope.next = true;
-            $timeout.cancel($scope.mytimeout);
+            $timeout.cancel($rootScope.mytimeout);
             $rootScope.counter = null;    
     };
 //End of Previous Button
@@ -87,7 +86,7 @@ app.controller('coursesController', function($scope, user, courses, $timeout, $l
 
         $rootScope.counter--;
         if ($rootScope.counter > 0) {
-            $scope.mytimeout = $timeout($rootScope.onTimeout,1000);
+            $rootScope.mytimeout = $timeout($rootScope.onTimeout,1000);
         }
         else if($scope.i < ($scope.numSlides - 1)) {
             if($scope.pb <= $scope.i){
@@ -126,7 +125,7 @@ app.controller('coursesController', function($scope, user, courses, $timeout, $l
    $scope.items = ['item1', 'item2', 'item3'];
 
     $scope.open = function (size) {
-    $timeout.cancel($scope.mytimeout);
+    $timeout.cancel($rootScope.mytimeout);
     var modalInstance = $modal.open({
       templateUrl: 'myModalContent.html',
       controller: 'ModalInstanceCtrl',

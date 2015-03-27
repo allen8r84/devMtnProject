@@ -50,14 +50,15 @@ app.controller('loginController', function ($scope, $location, $window, $firebas
 				password: password
 			});
 		}).then(function(authData) {
-            loginService.registerUser(email, authData, $scope.fName, $scope.lName);
+            /*loginService.registerUser(email, authData, $rootScope.fName, $rootScope.lName);
             var user = $firebaseObject(new Firebase(firebaseUrl + "/users/" + authData.uid));
             user.$loaded().then(function(user){
                 var uid = user.uid;
                 $location.path('/dashboard/' + uid)
-            })
+            })*/
 		}, function(error) {
-			console.log('error', error);
+			
+			/*console.log('error', error);*/
 		});	
 	};
 	

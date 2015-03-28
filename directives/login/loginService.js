@@ -8,7 +8,6 @@ app.service('loginService', function(envService, $firebaseObject, $timeout, $roo
         	var userEmail = email;
 			var	uid = authData.uid;
 			var	user = $firebaseObject(new Firebase(firebaseUrl + "/users/" + uid));
-                $rootScope.loggedInUser = user;    
 
 
 			$timeout(function() {

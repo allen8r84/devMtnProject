@@ -18,17 +18,30 @@
                 <div>To get started select one of the tabs above.<br/>If you'd like to look over available courses and register to take any, click on the "Courses" Tab.<br/> Click on the messages tab to see any general site messages or to contact us directly.</div>
             </div>
             <div role="tabpanel" class="tab-pane" id="Mas_Messages">
-                <div class="col-md-6 groupMessageArea">
-                    <form name="gMessageForm" ng-submit="postGMessage(gmTitle, gmessage)">
-                        <input name="title" id="title" type="title" placeholder="Message Title" ng-model="gmTitle" required></input><br/>
-                        <textarea name="gmessage" id="gmessage" type="gmessage" placeholder="Group Message" ng-model="gmessage" required></textarea>
-                        <div class="row">
-                            <div class="col-md-6 col-sx-3">
-                                <input type="submit" id="btnLogin" class="btn btn-info btn-block" value="Post Message" ng-disabled="gMessageForm.$invalid"></input>
-                            </div>
+                <div class="row">
+                    
+                        <div class="col-md-6 col-xs-6 groupMessageArea">
+                            <h2>Send message to all users:</h2>
+                            <form name="gMessageForm" ng-submit="postGMessage(gmTitle, gmessage)">
+                                <input name="title" id="title" type="title" placeholder="Message Title" ng-model="gmTitle" required></input><br/>
+                                <textarea name="gmessage" id="gmessage" type="gmessage" placeholder="Group Message" ng-model="gmessage" required></textarea>
+                                <div class="row">
+                                    <div class="col-md-6 col-sx-6">
+                                        <input type="submit" id="btnLogin" class="btn btn-info btn-block" value="Post Message" ng-disabled="gMessageForm.$invalid"></input>
+                                    </div>
+                                </div>
+                            </form>
                         </div>
-                        
-                    </form>
+                    
+                    <div class="col-md-6 col-xs-6 groupMessageArea">
+                        <div ng-repeat="gmessage in groupMessage | orderBy: '-time' | limitTo:4">
+                            <span><h3>{{gmessage.title}}</h3></span><br/>
+                            <span>{{gmessage.time | date: 'MMM-d-yy h:mm'}}</span><br/>
+                            <span><h4>{{gmessage.message}}</h4></span><br/>
+                            <span>~<em>{{gmessage.author}}</em></span>
+                            <hr/>
+                        </div>
+                    </div>
                 </div>
             </div>
             <div role="tabpanel" class="tab-pane" id="User_Messages">

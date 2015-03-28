@@ -10,23 +10,13 @@ app.run(function($rootScope, $location, envService, Auth, loginService, $firebas
     var firebaseUrl = envService.getEnv().firebase;
     Auth.$onAuth(function(authData) {
         if (authData) {
+            $rootScope.loggedInUser = $firebaseObject(new Firebase(firebaseUrl + "/users/" + authData.uid));
             console.log("Logged in as:", authData.uid);
-            /*$firebaseObject(new Firebase(firebaseUrl + "/users/" + authData.uid)).$loaded().then(function(user){
-                if(!user || !user.uid){
-                    user.email = authData.password.email;
-                    user.uid = authData.uid;
-                    user.role = 'uUser';
-                    user.$save().then(function(success) {
-     					console.log('success', success);
-     				}, function(error) {
-     					console.log('error', error);
-     				});
-                   
-                }
-            });*/
         }else {
         console.log("Logged out");
+            registeredService.unRegister();
             $location.path('/');
+            $rootScope.loggedInUser = null;
   }
 });
     $rootScope.brandTitle = envService.getEnv().brandTitle;

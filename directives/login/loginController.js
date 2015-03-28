@@ -6,14 +6,6 @@ app.controller('loginController', function ($scope, $location, $window, $firebas
     var moment = $window.moment;
     $scope.reg2 = true;
     
-    authObject.$onAuth(function(authData) {
-        if (authData) {
-         $rootScope.loggedInUser = $firebaseObject(new Firebase(firebaseUrl + "/users/" + authData.uid));
-        } else {
-          $rootScope.loggedInUser = null;
-        }
-      })
-    
     
     $scope.logIn = function(email, password) {
 		authObject.$authWithPassword({
@@ -63,9 +55,9 @@ app.controller('loginController', function ($scope, $location, $window, $firebas
 	};
 	
 	$scope.logOut = function() {
-	    registeredService.unRegister();
-	    delete $rootScope.loggedInUser;
-	    authObject.$unauth();
+	    authObject.$unauth()
+        /*registeredService.unRegister();*/
+        $location.path('/');
 	};
 	
 	$scope.dashboard = function(){

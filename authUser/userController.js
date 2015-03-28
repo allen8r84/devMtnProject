@@ -4,13 +4,18 @@ app.controller('userController', function($scope, user, groupMessage, $location,
     $scope.groupMessage = groupMessage;
     
     $scope.postGMessage = function(gmTitle, gmessage){
-        debugger
         if(confirm("Post Message to all users?")){
+            var date = Date.now();
             $scope.groupMessage.$add({
                 'author': 'Admin',
-                'time': moment().format(),
+                'time': date,
                 'title': gmTitle,
                 'message': gmessage
+            }).then(function(success){
+                console.log('success: ', success);
+                $scope.resetGMessage();
+            }, function(error){
+                console.log('error: ', error);
             });
             
 
@@ -20,6 +25,7 @@ app.controller('userController', function($scope, user, groupMessage, $location,
         
     }
     $scope.resetGMessage = function(){
+        debugger
         $scope.gmessage = {};
         $scope.gmTitle = {};
     }

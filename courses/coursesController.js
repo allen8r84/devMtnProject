@@ -7,6 +7,7 @@ app.controller('coursesController', function($scope, user, courses, $timeout, $l
     var time = 1; //set slide timer for questions
     var quizFreq = 10; //set after how many slides a quiz should be fired
     
+    
     $scope.i = 0;
     $scope.pb = $scope.i;
     $scope.courseTitle = $location.path().split('/').slice(3).join('');

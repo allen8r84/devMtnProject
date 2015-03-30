@@ -47,10 +47,10 @@ section.module.parallax-1 {
   background-image: url("/landing/img/prod/first-sized.jpg");
 }
 section.module.parallax-2 {
-  background-image: url("/landing/img/demo/_small/2.jpg");
+  background-image: url("/landing/img/prod/second-sized.jpg");
 }
 section.module.parallax-3 {
-  background-image: url("/landing/img/demo/_small/3.jpg");
+  background-image: url("/landing/img/prod/third-sized.jpg");
 }
 
 @media all and (min-width: 600px) {

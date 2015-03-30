@@ -22,7 +22,7 @@ section.module p {
   font-weight: 300;
 }
 section.module p:last-child {
-  margin-bottom: 0;
+  margin-bottom: 10px;
 }
 section.module.content {
   padding: 40px 0;
@@ -44,13 +44,13 @@ section.module.parallax h1 {
   text-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
 }
 section.module.parallax-1 {
-  background-image: url("/landing/img/prod/first-sized.jpg");
+  background-image: url("/landing/img/prod/first-sized-sml.jpg");
 }
 section.module.parallax-2 {
-  background-image: url("/landing/img/prod/second-sized.jpg");
+  background-image: url("/landing/img/prod/second-sized-sml.jpg");
 }
 section.module.parallax-3 {
-  background-image: url("/landing/img/prod/third-sized.jpg");
+  background-image: url("/landing/img/prod/third-sized-sml.jpg");
 }
 
 @media all and (min-width: 600px) {
@@ -69,15 +69,33 @@ section.module.parallax-3 {
     section.module.parallax h1 {
       line-height: 400px;
     }
+    section.module.parallax-1 {
+        background-image: url("/landing/img/prod/first-sized-med.jpg");
+    }
+    section.module.parallax-2 {
+        background-image: url("/landing/img/prod/second-sized-med.jpg");
+    }
+    section.module.parallax-3 {
+        background-image: url("/landing/img/prod/third-sized-med.jpg");
+    }
 }
 @media all and (min-width: 990px) {
     section.module.parallax h1 {
-      font-size: 160px;
+        font-size: 160px;
     }
     section.module.parallax {
-    height: 600px;
+        height: 600px;
     }
     section.module.parallax h1 {
-      line-height: 600px;
+        line-height: 600px;
+    }
+    section.module.parallax-1 {
+        background-image: url("/landing/img/prod/first-sized.jpg");
+    }
+    section.module.parallax-2 {
+        background-image: url("/landing/img/prod/second-sized.jpg");
+    }
+    section.module.parallax-3 {
+        background-image: url("/landing/img/prod/third-sized.jpg");
     }
 }

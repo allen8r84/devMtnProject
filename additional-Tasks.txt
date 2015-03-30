@@ -1,0 +1,84 @@
+Project Needs:
+~~~~~~Proper Authentication
+    ~~~~~~DONE-Creation of user
+    ~~~~~~DONE-Update specific keys in user object (such as lastLogin) without overwriting the whole object
+~~~~Redirects with Authentication
+    ~~~~~DONE - Figure out ngRoute with proper “/url/:spedificUser” routing
+~~~~User Dashboard
+    ~~~~~Done-Load relevant Information to only user
+    
+~~~ DONE - Security on Firebase to allow user to see only their content
+
+~~~~DONE - User Roles
+
+
+~~~~DONE - Give admin more features:
+    o	View, search, modify Users
+    
+    o	Dashboard message system between user and Admin
+    
+    o	Ability to create new learning modules (objects?)
+        o   Slides
+            •	No sound needed (and at this point wanted
+            •	Each timed 15-20 seconds
+            •	Animation (optional)
+            •	Images (probable)
+            •	Interactive quiz every 5-10 slides
+            •	Ability to skip through already seen slides, but not unseen slides (a slide’s timer must complete before skipping through it is an option)
+
+~~~~~~DONE: create timing system to prevent moving through a lesson too fast
+
+•	create a certificate generator to give to user when they have competed full certification
+
+•	create interaction with State records so certification will be valid
+
+
+
+database structure:
+users:
+ ~this is where the users info is stored
+
+groupMessages:
+  ~mass outgoing message from admin to users in their "messages tab"
+
+userMessages:
+ ~messages between user and admin "linked to user's account"
+ 
+ courses > state > utah:
+ ~where courses are created and stored
+ 
+ 
+
+ 
+ 
+ 
+ 
+ security Rules:
+ {
+  "rules": {
+    "estatelms": {
+      "groupMessages": {
+        ".read": "true",
+        ".write": "root.child('estatelms').child('users').child(auth.uid).child('role').val() == 'sAdmin' || root.child('estatelms').child('users').child(auth.uid).child('role').val() == 'cService'",
+        "$message": {
+          ".read": true
+        }
+      },
+      "users": {
+        "$user": {
+          ".read": "root.child('estatelms').child('users').child(auth.uid).child('role').val() == 'sAdmin' || $user === auth.uid ",
+          ".write": "root.child('estatelms').child('users').child(auth.uid).child('role').val() == 'sAdmin' || $user === auth.uid "
+        }
+      },
+      "courses": {
+        "state":{
+          "ut":{
+            ".read": true,
+            ".write": "root.child('estatelms').child('users').child(auth.uid).child('role').val() == 'sAdmin' || root.child('estatelms').child('users').child(auth.uid).child('role').val() == 'cService'"
+          }
+        }
+      }
+    }
+  }
+}
+ 

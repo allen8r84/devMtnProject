@@ -20,21 +20,38 @@
             <div role="tabpanel" class="tab-pane" id="Mas_Messages">
                 <div class="row">
                     
-                        <div class="col-md-6 col-xs-6 groupMessageArea">
+                        <div class="col-md-6 col-sm-6 col-xs-12">
                             <h2>Send message to all users:</h2>
-                            <form name="gMessageForm" ng-submit="postGMessage(gmTitle, gmessage)">
-                                <input name="title" id="title" type="title" placeholder="Message Title" ng-model="gmTitle" required></input><br/>
-                                <textarea name="gmessage" id="gmessage" type="gmessage" placeholder="Group Message" ng-model="gmessage" required></textarea>
-                                <div class="row">
-                                    <div class="col-md-6 col-sx-6">
-                                        <input type="submit" id="btnLogin" class="btn btn-info btn-block" value="Post Message" ng-disabled="gMessageForm.$invalid"></input>
+                            <form name="gMessageForm" class="form" ng-submit="postGMessage(gmTitle, gmessage)">
+                                <div class="form-group">
+                                    <div class="row">
+                                        <div class="col-xs-12">
+                                            <label>Message Title</label>
+                                        </div>
+                                        <div class="col-xs-12">
+                                            <input name="title" id="title" type="title" placeholder="Message Title" ng-model="gmTitle" required></input>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <textarea name="gmessage" id="gmessage" type="gmessage" placeholder="Group Message" ng-model="gmessage" required></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="row">
+                                        <div class="col-md-6 col-sx-6">
+                                            <input type="submit" id="btnLogin" class="btn btn-info btn-block" value="Post Message" ng-disabled="gMessageForm.$invalid"></input>
+                                        </div>
                                     </div>
                                 </div>
                             </form>
                         </div>
                     
-                    <div class="col-md-6 col-xs-6 groupMessageArea">
-                        <div ng-repeat="gmessage in groupMessage | orderBy: '-time' | limitTo:4">
+                    <div class="col-md-6 col-sm-6 col-xs-12">
+                        <div ng-repeat="gmessage in groupMessage | orderBy: '-time' | limitTo:3">
                             <span><h3>{{gmessage.title}}</h3></span><br/>
                             <span>{{gmessage.time | date: 'MMM-d-yy h:mm'}}</span><br/>
                             <span><h4>{{gmessage.message}}</h4></span><br/>

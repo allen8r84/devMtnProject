@@ -1,6 +1,6 @@
 <!-- Login view -->
 <li class="nav pull-right dropdown" id="menuLogin" ng-show="!loggedInUser">
-    <a class="dropdown-toggle btn-group" href="#" data-toggle="dropdown" id="navLogin">Login</a>
+    <a class="dropdown-toggle btn-group" href="#" data-toggle="dropdown" id="navLogin">Login <span class="glyphicon glyphicon-log-in"/></a>
     <div class="dropdown-menu drpLogin" style="padding:10px; margin:10px" ng-click="$event.stopPropagation()">
         <form name="loginForm" class="form" id="formLogin" ng-submit="logIn(email, password)">
             <div class="form-group">
@@ -31,7 +31,7 @@
             <div class="form-group">
                 <div class="row">
                     <div class="col-xs-12">
-                        <label>Login Details</label>
+                        <label>Login Credentials</label>
                     </div>
                     <div>
                         <div  class="col-xs-6">
@@ -77,13 +77,10 @@
                         <input class="form-control" placeholder="City" ng-model="city" required></input>
                     </div>
                     <div class="col-xs-4">
-                        <select class="form-control" required>
-                            <option value="ut" ng-model="state">Utah</option>
-                            <option value="ca" ng-model="state">California</option>
-                        </select>
+                        <select class="form-control" ng-model="stateInitial" ng-options="state as state.label for state in states" required/>
                     </div>
                     <div class="col-xs-4">
-                        <input class="form-control" placeholder="Zip" ng-model="zip" required></input>
+                        <input class="form-control" maxlength="5" placeholder="Zip" ng-model="zip" required></input>
                     </div>
                 </div>
             </div>
@@ -91,7 +88,7 @@
                 <div class="row">
                     <div>
                         <div class="col-xs-6">
-                            <label>Phone</label>
+                            <label>Phone</label> <span><em>ex:999-999-9999</em></span>
                             <input class="form-control" placeholder="Phone (optional)" type="tel" name="tel" id="tel" ng-model="tel"></input>
                         </div>
                     </div>

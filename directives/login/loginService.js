@@ -4,11 +4,10 @@ app.service('loginService', function(envService, $firebaseObject, $timeout, $roo
     var firebaseUrl = envService.getEnv().firebase; 
     
     
-    this.registerUser = function(email, authData, fName, lName){
+    this.registerUser = function(email, authData, fName, lName, sLineOne, sLineTwo, city, state, zip, tel, lNumber){
         	var userEmail = email;
 			var	uid = authData.uid;
 			var	user = $firebaseObject(new Firebase(firebaseUrl + "/users/" + uid));
-
 
 			$timeout(function() {
 				user.email = userEmail;
@@ -19,6 +18,13 @@ app.service('loginService', function(envService, $firebaseObject, $timeout, $roo
 				user.role = 'uUser';
 				user.logInCount = 1;
 				user.lastLogon = moment().format();
+				user.sLineOne = sLineOne;
+				user.sLineTwo = sLineTwo;
+				user.city = city;
+				user.state = state;
+				user.zip = zip;
+				user.tel = tel;
+				user.lNumber = lNumber;
 				user.$save().then(function(success) {
 					/*console.log('success', success);*/
 				}, function(error) {

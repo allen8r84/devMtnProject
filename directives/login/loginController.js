@@ -6,6 +6,15 @@ app.controller('loginController', function ($scope, $location, $window, $firebas
     var moment = $window.moment;
     $scope.reg2 = true;
     
+    $scope.states = [
+        {label: 'Utah', value: 'ut'},
+        {label: 'California', value: 'ca'},
+        {label: 'Idaho', value: 'id'},
+        {label: 'Arizona', value: 'az'}
+    
+    ];
+    $scope.stateInitial = $scope.states[0];
+    
     
     $scope.logIn = function(email, password) {
 		authObject.$authWithPassword({
@@ -42,7 +51,20 @@ app.controller('loginController', function ($scope, $location, $window, $firebas
 				password: password
 			});
 		}).then(function(authData) {
-            loginService.registerUser(email, authData, $rootScope.fName, $rootScope.lName);
+            var sLineTwo = $scope.sLineTwo;
+            var tel = $scope.tel;
+            var lNumber = $scope.lNumber;
+            if(!$scope.sLineTwo){
+                sLineTwo = "";
+            }
+            if(!$scope.tel){
+                tel = "";
+            }
+            if(!$scope.lNumber){
+                lNumber = "";
+            }
+            
+            loginService.registerUser(email, authData, $rootScope.fName, $rootScope.lName, $scope.sLineOne, sLineTwo, $scope.city, $scope.stateInitial.value, $scope.zip, tel, lNumber);
             var user = $firebaseObject(new Firebase(firebaseUrl + "/users/" + authData.uid));
             user.$loaded().then(function(user){
                 var uid = user.uid;

@@ -28,16 +28,16 @@ section.module.content {
   padding: 40px 0;
 }
 section.module.parallax {
-  height: 200px;
+  height: 250px;
   background-position: 50% 50%;
   background-repeat: no-repeat;
   background-attachment: fixed;
-  background-size: cover;
+  background-size: auto;
 }
 section.module.parallax h1 {
   color: rgba(255, 255, 255, 0.9);
   font-size: 48px;
-  line-height: 200px;
+  line-height: 250px;
   font-weight: 700;
   text-align: center;
   /*text-transform: uppercase;*/
@@ -64,7 +64,11 @@ section.module.parallax-3 {
       font-size: 96px;
     }
     section.module.parallax {
-    height: 400px;
+        height: 400px;
+        background-position: 50% 50%;
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        background-size: cover;    
     }
     section.module.parallax h1 {
       line-height: 400px;
@@ -85,6 +89,10 @@ section.module.parallax-3 {
     }
     section.module.parallax {
         height: 600px;
+        background-position: 50% 50%;
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        background-size: cover;
     }
     section.module.parallax h1 {
         line-height: 600px;

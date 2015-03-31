@@ -22,6 +22,7 @@ app.controller('coursesController', function($scope, user, courses, $timeout, $l
     $scope.aCourse = aCourse;
     
     $scope.courseArray = [];
+    $scope.pageArray = []
     
     $scope.aCourse.$loaded().then(function(){
         $scope.numSlides = aCourse.length;
@@ -33,6 +34,9 @@ app.controller('coursesController', function($scope, user, courses, $timeout, $l
         $scope.percent = 100 / $scope.max; //setting progress bar slide value
         $rootScope.mytimeout = $timeout($rootScope.onTimeout,1000);//start slide timer at content load
         $scope.bigTotalItems = $scope.max;
+        for(var k = 1; k <= $scope.bigTotalItems; k++){
+            $scope.pageArray.push(k);
+        }
     });
 
 //end of pre-defined and pre-loaded variables    
@@ -153,6 +157,21 @@ app.controller('coursesController', function($scope, user, courses, $timeout, $l
 //pagination for slides
   $scope.maxSize = 7;
   $scope.bigCurrentPage = 1;
+  
+  $scope.paginateSlide = function($index){
+      if($index < $scope.pb){
+          $scope.i = $index;
+          $scope.next = true;
+          $timeout.cancel($rootScope.mytimeout);
+          $rootScope.counter = null;
+      }else if($index === $scope.pb){
+          $scope.i = $index;
+          $rootScope.mytimeout = $timeout($rootScope.onTimeout,1000); //restart timer if slide hasn't been completed yet
+          $rootScope.counter = time;
+          $scope.setNext();
+      }
+  }
+  
 //end pagination for slides
   
   

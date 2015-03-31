@@ -1,6 +1,6 @@
 <div class="container">
     <div class="text-center">
-        <h1>{{courseTitle}}</h1>
+        <h1>{{courseTitle}}: {{max}} Slides</h1>
         <em>Current Course Progress</em>
         <progressbar ng-if="max" value="percent * (pb)" type="success" class="progress-striped active">{{progDisplay}}%</progressbar>
         <hr/>
@@ -26,6 +26,7 @@
             <h2>{{currentCourse[i].bullet6}}</h2>
         </li>
     </ul>
+    <hr/>
     <div class="row">
         <div class="col-xs-6 col-md-4">
             <button type="button" id="btnLogin" class="btn btn-info btn-block" ng-click="backSlide()" ng-disabled="i <= 0">&lt; Previous</button>
@@ -37,7 +38,18 @@
     </div>
     <div class="text-center">
         <hr/>
-        <h3>Slide {{i + 1}} of {{max}}</h3>
+        <!--<h3>Slide {{i + 1}} of {{max}}</h3>-->
+        <nav>
+            <ul class="pagination">
+
+                
+                <li ng-repeat="page in pageArray"><a href="" ng-click="paginateSlide($index)">{{page}} <span class="glyphicon glyphicon-ok" ng-show="pb > $index" style="color:green"/></a></li>
+                
+
+            </ul>
+        </nav>
+        
+        
 <!--        <pagination total-items="bigTotalItems" ng-model="bigCurrentPage" max-size="maxSize" class="pagination-sm" rotate="false" num-pages="numPages" direction-links="false" items-per-page="1"></pagination>-->
     </div>
 </div>

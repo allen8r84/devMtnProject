@@ -4,8 +4,8 @@ app.controller('coursesController', function($scope, user, courses, $timeout, $l
 
 //pre-defined and pre-loaded variables    
     var firebaseUrl = envService.getEnv().firebase; 
-    var time = 10; //set slide timer for questions
-    var quizFreq = 3; //set after how many slides a quiz should be fired
+    var time = 1; //set slide timer for questions
+    var quizFreq = 10; //set after how many slides a quiz should be fired
     
     
     $scope.i = 0;
@@ -163,7 +163,11 @@ app.controller('coursesController', function($scope, user, courses, $timeout, $l
           $scope.i = $index;
           $scope.next = true;
           $timeout.cancel($rootScope.mytimeout);
-          $rootScope.counter = null;
+          if(parseInt($index + 1) === parseInt($scope.bigTotalItems)){
+                $rootScope.counter = "Finished!";
+          }else{
+                $rootScope.counter = null;
+          }
       }else if($index === $scope.pb){
           $scope.i = $index;
           $rootScope.mytimeout = $timeout($rootScope.onTimeout,1000); //restart timer if slide hasn't been completed yet

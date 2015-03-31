@@ -4,8 +4,19 @@
     <div class="dropdown-menu drpLogin" style="padding:10px; margin:10px" ng-click="$event.stopPropagation()">
         <form name="loginForm" class="form" id="formLogin" ng-submit="logIn(email, password)">
             <div class="form-group">
-                <input class="form-control" type="email" placeholder="Email" ng-model="email" required/> 
-                <input class="form-control" type="password" placeholder="Password" ng-model="password" required/>
+                <div class="row">
+                    <div class="col-xs-12">
+                        <label>Email &amp; Password</label>
+                    </div>
+                    <div class="col-xs-6">
+                        <input class="form-control" type="email" placeholder="Email" ng-model="email" required/>
+                    </div>
+                    <div class="col-xs-6">
+                        <input class="form-control" type="password" placeholder="Password" ng-model="password" required/>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
                 <div class="row">
                     <div class="col-xs-8">
                         <input type="submit" id="btnLogin" class="btn btn-info btn-block pull-right" ng-disabled="loginForm.$invalid" value="Login"></input>
@@ -16,11 +27,83 @@
         <!-- Registration View -->
         <hr></hr><a href="" ng-click="showReg()"> New User? Click to register...</a>
         <form name="regForm" class="form" id="formRegister" ng-submit="register(emailr, passwordr)" ng-show="reg"> 
+            <br/>
             <div class="form-group">
-                <input class="form-control" placeholder="First Name" ng-model="fName" required></input>
-                <input class="form-control" placeholder="Last Name" ng-model="lName" required></input>
-                <input class="form-control" type="email" placeholder="Email" ng-model="emailr" required/> 
-                <input class="form-control" type="password" placeholder="Password" ng-model="passwordr" required/>
+                <div class="row">
+                    <div class="col-xs-12">
+                        <label>Login Details</label>
+                    </div>
+                    <div>
+                        <div  class="col-xs-6">
+                            <input class="form-control" type="email" placeholder="Email" ng-model="emailr" required/>
+                        </div>
+                        <div  class="col-xs-6">
+                            <input class="form-control" type="password" placeholder="Password" ng-model="passwordr" required/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-xs-12">
+                        <label>Name</label>
+                    </div>
+                    <div>
+                        <div class="col-xs-6">
+                            <input class="form-control" placeholder="First Name" ng-model="fName" required></input>
+                        </div>
+                        <div class="col-xs-6">
+                            <input class="form-control" placeholder="Last Name" ng-model="lName" required></input>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-xs-12">
+                        <label>Address</label>
+                    </div>
+                    <div>
+                        <div class="col-xs-12">
+                            <input class="form-control" placeholder="Street Line 1" ng-model="sLineOne" required></input>
+                        </div>
+                        <div class="col-xs-12">
+                            <input class="form-control" placeholder="Street Line 2" ng-model="sLineTwo"></input>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-4">
+                        <input class="form-control" placeholder="City" ng-model="city" required></input>
+                    </div>
+                    <div class="col-xs-4">
+                        <select class="form-control" required>
+                            <option value="ut" ng-model="state">Utah</option>
+                            <option value="ca" ng-model="state">California</option>
+                        </select>
+                    </div>
+                    <div class="col-xs-4">
+                        <input class="form-control" placeholder="Zip" ng-model="zip" required></input>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="row">
+                    <div>
+                        <div class="col-xs-6">
+                            <label>Phone</label>
+                            <input class="form-control" placeholder="Phone" type="tel" name="tel" id="tel" ng-model="tel" required></input>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="col-xs-6">
+                            <label>License Num.</label>
+                            <input class="form-control" placeholder="License #" ng-model="lNumber" required></input>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
                 <div class="row">
                     <div class="col-xs-8">
                         <input type="submit" id="btnLogin" class="btn btn-info btn-block pull-right" value="Register" ng-disabled="regForm.$invalid"></input>
@@ -34,7 +117,7 @@
 
 <!-- Logout View -->
 <li class="nav pull-right dropdown" id="menuLogout" ng-show="loggedInUser">
-    <a class="dropdown-toggle btn-group" href="#" data-toggle="dropdown" id="navLogout"><strong>Logged in as: {{loggedInUser.fName}}</strong></a>
+    <a class="dropdown-toggle btn-group" href="#" data-toggle="dropdown" id="navLogout"><strong>Logged in as: {{loggedInUser.fName}} <span class="glyphicon glyphicon-menu-down" ng-show="loggedInUser"/></strong></a>
     <div class="dropdown-menu" style="padding:10px; margin:10px">
         <a href="" ng-click="dashboard()">Dashboard</a><br /><hr></hr>
         <a href="" ng-click="isadmin()" ng-if="loggedInUser.role === 'sAdmin' || loggedInUser.role === 'cService'">Admin</a><hr ng-if="loggedInUser.role === 'sAdmin' || loggedInUser.role === 'cService'"></hr>

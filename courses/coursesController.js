@@ -4,8 +4,8 @@ app.controller('coursesController', function($scope, user, courses, $timeout, $l
 
 //pre-defined and pre-loaded variables    
     var firebaseUrl = envService.getEnv().firebase; 
-    var time = 1; //set slide timer for questions
-    var quizFreq = 10; //set after how many slides a quiz should be fired
+    var time = 5; //set slide timer for questions
+    var quizFreq = 5; //set after how many slides a quiz should be fired
     
     
     $scope.i = 0;
